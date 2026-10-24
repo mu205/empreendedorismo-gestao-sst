@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nome do sistema</title>
+
+    <!-- tailwind CSS (sei nada de css) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- lucide (pra ter ícones bonitinhos) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- arquivos do projeto -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="min-h-screen md:flex">
+
+        <!-- menu do lado esquerdo -->
+        <aside class="sidebar bg-slate-900 text-white md:w-64 md:min-h-screen p-5">
+
+            <div class="flex items-center gap-3 mb-9">
+                <div class="bg-blue-600 rounded-xl p-2">
+                    <i data-lucide="shield-check"></i>
+                </div>
+
+                <div>
+                    <h1 class="text-xl font-bold">Nome</h1>
+                    <p class="text-xs text-slate-400">Gestão de treinamentos</p>
+                </div>
+            </div>
+
+            <p class="text-xs uppercase tracking-wider text-slate-400 mb-3">
+                Menu
+            </p>
+
+            <nav class="space-y-2">
+
+                <a href="#dashboard" class="nav-link active"
+                   data-page="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#trabalhadores" class="nav-link"
+                   data-page="trabalhadores">
+                    <i data-lucide="users"></i>
+                    <span>Trabalhadores</span>
+                </a>
+
+                <a href="#certificados" class="nav-link"
+                   data-page="certificados">
+                    <i data-lucide="file-check"></i>
+                    <span>Certificados</span>
+                </a>
+
+                <a href="#obras" class="nav-link"
+                   data-page="obras">
+                    <i data-lucide="building-2"></i>
+                    <span>Obras e equipes</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- página -->
+        <main class="flex-1 min-w-0 p-5 md:p-8">
+
+            <!-- cabeçalho -->
+            <header class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <div>
+                    <p class="text-sm text-slate-500">
+                        Gestão de Saúde e Segurança do Trabalho
+                    </p>
+                    <h2 id="page-title"
+                        class="text-2xl md:text-3xl font-bold mt-1">
+                        Visão geral
+                    </h2>
+                    <p id="current-date" class="text-sm text-slate-500 mt-2"></p>
+                </div>
+
+                <div class="flex items-center gap-3 bg-white rounded-xl p-3 border border-slate-200">
+                    <div class="bg-blue-100 text-blue-700 rounded-full p-2">
+                        <i data-lucide="user-round"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold">Usuário</p>
+                        <p class="text-xs text-slate-500">Administrador</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- dashboard -->
+            <section id="page-dashboard" class="page-content">
+
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold">Resumo dos certificados</h3>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Acompanhe a situação dos treinamentos cadastrados.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 mb-8">
+
+                    <article class="metric-card">
+                        <div class="metric-icon bg-blue-100 text-blue-700">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <p class="metric-label">Trabalhadores</p>
+                        <p id="total-trabalhadores" class="metric-value">0</p>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon bg-slate-100 text-slate-700">
+                            <i data-lucide="files"></i>
+                        </div>
+                        <p class="metric-label">Certificados</p>
+                        <p id="total-certificados" class="metric-value">0</p>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon bg-red-100 text-red-700">
+                            <i data-lucide="circle-alert"></i>
+                        </div>
+                        <p class="metric-label">Vencidos</p>
+                        <p id="total-vencidos" class="metric-value text-red-600">0</p>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon bg-amber-100 text-amber-700">
+                            <i data-lucide="calendar-clock"></i>
+                        </div>
+                        <p class="metric-label">Próximos do vencimento</p>
+                        <p id="total-proximos" class="metric-value text-amber-600">0</p>
+                        <p class="metric-description">Vencem em até 30 dias</p>
+                    </article>
+
+                    <article class="metric-card">
+                        <div class="metric-icon bg-emerald-100 text-emerald-700">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <p class="metric-label">Regulares</p>
+                        <p id="total-regulares" class="metric-value text-emerald-600">0</p>
+                    </article>
+
+                </div>
+
+                <!-- prioridades -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="flex flex-wrap items-center justify-between gap-3 p-5 border-b border-slate-200">
+                        <div>
+                            <h3 class="text-lg font-semibold">
+                                Central de Alertas
+                            </h3>
+                            <p class="text-sm text-slate-500 mt-1">
+                                Os mais urgentes aparecem primeiro.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="lista-de-prioridade" class="divide-y divide-slate-100">
+                        <!-- o script preenche essa parte aqui -->
+                    </div>
+
+                </section>
+
+            </section>
+
+            <!-- trabalhadores -->
+            <section id="page-trabalhadores" class="page-content hidden">
+
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold">Equipe cadastrada</h3>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Consulte trabalhadores e acompanhe suas pendências.
+                        </p>
+                    </div>
+
+                    <span id="trabalhadores-contagem"
+                        class="text-sm text-slate-500">
+                        0 trabalhadores
+                    </span>
+                </div>
+
+                <!-- busca e filtros -->
+                <div class="bg-white border border-slate-200 rounded-xl p-4 mb-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                        <div>
+                            <label for="busca-trabalhadores"
+                                class="block text-sm font-medium mb-2">
+                                Buscar trabalhador
+                            </label>
+
+                            <div class="search-box">
+                                <i data-lucide="search"></i>
+                                <input
+                                    id="busca-trabalhadores"
+                                    type="search"
+                                    placeholder="Nome ou função..."
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="filtro-obra" class="block text-sm font-medium mb-2">
+                                Obra
+                            </label>
+
+                            <select id="filtro-obra" class="filter-select">
+                                <option value="todas">Todas as obras</option>
+                                <option value="Unidade A">Unidade A</option>
+                                <option value="Unidade B">Unidade B</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="filtro-situacao-trabalhador"
+                                class="block text-sm font-medium mb-2">
+                                Situação geral
+                            </label>
+
+                            <select id="filtro-situacao-trabalhador"
+                                    class="filter-select">
+                                <option value="todas">Todas as situações</option>
+                                <option value="vencido">Possui certificado vencido</option>
+                                <option value="atencao">Próximo do vencimento</option>
+                                <option value="regular">Todos regulares</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end mt-4">
+                        <button id="limpar-filtros-trabalhadores"
+                                class="text-sm text-blue-700 font-medium">
+                            Limpar filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- tabela -->
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+
+                    <div class="overflow-x-auto">
+                        <table class="certificates-table">
+                            <thead>
+                                <tr>
+                                    <th>Trabalhador</th>
+                                    <th>Obra</th>
+                                    <th>Certificados</th>
+                                    <th>Regulares</th>
+                                    <th>Pendências</th>
+                                    <th>Situação geral</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tabela-trabalhadores">
+                                <!-- preenchido pelo script -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p id="nenhum-trabalhador"
+                    class="hidden text-center text-sm text-slate-500 p-8">
+                        Nenhum trabalhador corresponde aos filtros selecionados.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- certificados -->
+            <section id="page-certificados" class="page-content hidden">
+
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold">Todos os certificados</h3>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Consulte validades e identifique pendências.
+                        </p>
+                    </div>
+
+                    <span id="certificados-contagem"
+                        class="text-sm text-slate-500">
+                        0 certificados
+                    </span>
+                </div>
+
+                <!-- busca e filtros -->
+                <div class="bg-white border border-slate-200 rounded-xl p-4 mb-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                        <div>
+                            <label for="busca-certificados"
+                                class="block text-sm font-medium mb-2">
+                                Buscar
+                            </label>
+
+                            <div class="search-box">
+                                <i data-lucide="search"></i>
+
+                                <input
+                                    id="busca-certificados"
+                                    type="search"
+                                    placeholder="Nome, treinamento ou obra..."
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="filtro-status"
+                                class="block text-sm font-medium mb-2">
+                                Situação
+                            </label>
+
+                            <select id="filtro-status" class="filter-select">
+                                <option value="todos">Todas as situações</option>
+                                <option value="vencido">Vencidos</option>
+                                <option value="proximo">Próximos do vencimento</option>
+                                <option value="regular">Regulares</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="filtro-treinamento"
+                                class="block text-sm font-medium mb-2">
+                                Treinamento
+                            </label>
+
+                            <select id="filtro-treinamento" class="filter-select">
+                                <option value="todos">Todos os treinamentos</option>
+                                <option value="NR-10">NR-10</option>
+                                <option value="NR-12">NR-12</option>
+                                <option value="NR-35">NR-35</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end mt-4">
+                        <button id="limpar-filtros"
+                                class="text-sm text-blue-700 font-medium">
+                            Limpar filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- tabela -->
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+
+                    <div class="overflow-x-auto">
+                        <table class="certificates-table">
+                            <thead>
+                                <tr>
+                                    <th>Trabalhador</th>
+                                    <th>Treinamento</th>
+                                    <th>Obra</th>
+                                    <th>Validade</th>
+                                    <th>Dias restantes</th>
+                                    <th>Situação</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tabela-certificados">
+                                <!-- preenchido pelo script -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p id="nenhum-certificado"
+                    class="hidden text-center text-sm text-slate-500 p-8">
+                        Nenhum certificado corresponde aos filtros selecionados.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- obras -->
+            <section id="page-obras" class="page-content hidden">
+
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-slate-800">
+                    Obras e equipes
+                    </h2>
+                    <p class="text-sm text-slate-500 mt-1">
+                    Acompanhe os trabalhadores e a situação dos certificados por unidade.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+
+                    <div class="metric-card">
+                    <div class="metric-icon bg-blue-50 text-blue-600">
+                        <i data-lucide="building-2"></i>
+                    </div>
+                    <p class="metric-label">Obras e unidades</p>
+                    <p id="obras-total" class="metric-value">0</p>
+                    </div>
+
+                    <div class="metric-card">
+                    <div class="metric-icon bg-slate-100 text-slate-600">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <p class="metric-label">Trabalhadores alocados</p>
+                    <p id="obras-trabalhadores" class="metric-value">0</p>
+                    </div>
+
+                    <div class="metric-card">
+                    <div class="metric-icon bg-red-50 text-red-600">
+                        <i data-lucide="shield-alert"></i>
+                    </div>
+                    <p class="metric-label">Certificados vencidos</p>
+                    <p id="obras-vencidos" class="metric-value">0</p>
+                    </div>
+
+                </div>
+
+                <!-- filtro -->
+                <div class="bg-white border border-slate-200 rounded-xl p-4 mb-6">
+                    <label for="filtro-situacao-obra"
+                    class="block text-sm font-medium text-slate-700 mb-1">
+                    Filtrar unidades
+                    </label>
+
+                    <select id="filtro-situacao-obra" class="filter-select w-full sm:w-80">
+                    <option value="todas">Todas as unidades</option>
+                    <option value="vencidos">Com certificados vencidos</option>
+                    <option value="pendencias">Com alguma pendência</option>
+                    <option value="regular">Sem certificados vencidos</option>
+                    </select>
+                </div>
+
+                <!-- unidades -->
+                <div id="lista-obras" class="grid grid-cols-1 xl:grid-cols-2 gap-5">
+                    <!-- preenchido pelo script -->
+                </div>
+
+                <div id="nenhuma-obra" class="hidden bg-white border border-slate-200 rounded-xl p-8 text-center text-sm text-slate-500">
+                    Nenhuma unidade corresponde ao filtro selecionado.
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+</body>
+</html>

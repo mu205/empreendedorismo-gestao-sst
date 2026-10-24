@@ -1,0 +1,248 @@
+/* eu não entendo nadinha de como monta o css, só sei depois que tá pronto, foi o chatgpt que fez esse arquivo todo :P os comentários foi baseado no que eu entendi */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* menu lateral */
+
+.sidebar {
+    flex-shrink: 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+    background: #1e293b;
+    color: white;
+}
+
+.nav-link.active {
+    background: #2563eb;
+    color: white;
+}
+
+.nav-link svg {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+/* cartões de indicadores */
+
+.metric-card {
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    min-width: 0;
+}
+
+.metric-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.metric-label {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.metric-value {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.metric-description {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* lista de pendências */
+
+.pending-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+}
+
+.pending-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pending-detail {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-vencido {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.status-proximo {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-regular {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+/* placeholder */
+
+.placeholder-page {
+    min-height: 300px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+}
+
+.placeholder-page svg {
+    width: 40px;
+    height: 40px;
+    color: #2563eb;
+    margin-bottom: 16px;
+}
+
+.placeholder-page h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.placeholder-page p {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        min-height: auto;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        margin: 2px;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .pending-row {
+        align-items: flex-start;
+    }
+}
+
+
+/* busca e filtros */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    padding: 0 12px;
+    min-height: 42px;
+}
+
+.search-box svg {
+    width: 17px;
+    height: 17px;
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.filter-select {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: white;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #334155;
+}
+
+/* tabela de certificados */
+
+.certificates-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.certificates-table th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.certificates-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+}
+
+.certificates-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.certificates-table tbody tr:last-child td {
+    border-bottom: none;
+}
